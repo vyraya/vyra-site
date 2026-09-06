@@ -596,21 +596,34 @@
 
  let currentSlide = 0;
 
+const hoodiePhotos = [
+
+  "IMG_4085.png",
+
+  "IMG_4086.png"
+
+];
+
 function moveSlide(direction) {
+
   currentSlide += direction;
 
   if (currentSlide < 0) {
-    currentSlide = 1;
+
+    currentSlide = hoodiePhotos.length - 1;
+
   }
 
-  if (currentSlide > 1) {
+  if (currentSlide >= hoodiePhotos.length) {
+
     currentSlide = 0;
+
   }
 
-  document.querySelector(".slides").style.transform =
-    `translateX(-${currentSlide * 50}%)`;
+  document.getElementById("hoodiePhoto").src = hoodiePhotos[currentSlide];
 
   document.querySelectorAll(".dot").forEach((dot, index) => {
+
     dot.classList.toggle("active", index === currentSlide);
   });
 } </script>
