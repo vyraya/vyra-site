@@ -6,7 +6,68 @@
   <title>VYRA — made for your everyday mood.</title>
 
   <style>
-    * {
+   .hoodie-slider {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.slides {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+
+.slides img {
+  width: 50%;
+  height: 100%;
+  object-fit: contain;
+  padding: 15px;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255,255,255,0.8);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.prev {
+  left: 12px;
+}
+
+.next {
+  right: 12px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #aaa;
+  border-radius: 50%;
+  margin: 4px;
+}
+
+.dot.active {
+  background: #24211f;
+} * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -340,22 +401,20 @@
 
       <div class="products">
 
-        <div class="product">
-          <div class="product-image">
-            <img src="IMG_4085.png" alt="VYRA Essential Hoodie">
-<img src="IMG_4086.png" alt="VYRA Essential Hoodie">
-          </div>
+       <div class="product-image hoodie-slider">
+  <div class="slides">
+    <img src="IMG_4085.png" alt="VYRA Essential Hoodie - devant">
+    <img src="IMG_4086.png" alt="VYRA Essential Hoodie - derrière">
+  </div>
 
-          <div class="product-info">
-            <h3>VYRA Essential Hoodie</h3>
-            <p>Cozy oversized hoodie</p>
-            <div class="price">$59.99 CAD</div>
+  <button class="prev" onclick="moveSlide(-1)">‹</button>
+  <button class="next" onclick="moveSlide(1)">›</button>
 
-            <button class="add" onclick="addToCart('VYRA Essential Hoodie', 59.99)">
-              Add to bag
-            </button>
-          </div>
-        </div>
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+  </div>
+</div>
 
 
         <div class="product">
@@ -535,7 +594,26 @@
 
     }
 
-  </script>
+ let currentSlide = 0;
+
+function moveSlide(direction) {
+  currentSlide += direction;
+
+  if (currentSlide < 0) {
+    currentSlide = 1;
+  }
+
+  if (currentSlide > 1) {
+    currentSlide = 0;
+  }
+
+  document.querySelector(".slides").style.transform =
+    `translateX(-${currentSlide * 50}%)`;
+
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentSlide);
+  });
+} </script>
 
 </body>
 </html>
