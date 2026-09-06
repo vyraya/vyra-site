@@ -1,1 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VYRA — made for your everyday mood.</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f8f5f2;
+      color: #24211f;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(248,245,242,0.95);
+      border-bottom: 1px solid #e5dfda;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #24211f;
+      font-size: 14px;
+    }
+
+    .cart {
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 70px 20px;
+      background: #e9e0da;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .small-title {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 12vw, 120px);
+      letter-spacing: 8px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      margin-bottom: 30px;
+      color: #625b56;
+    }
+
+    .button {
+      display: inline-block;
+      background: #24211f;
+      color: white;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      opacity: 0.85;
+    }
+
+    section {
+      padding: 80px 6%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #756d68;
+      font-size: 14px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .product {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: 0.25s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ddd3cc;
+      font-size: 13px;
+      color: #746b65;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .product-info p {
+      color: #6d6560;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .add {
+      margin-top: 15px;
+      width: 100%;
+      border: none;
+      background: #24211f;
+      color: white;
+      padding: 12px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .about {
+      background: #eee8e3;
+      text-align: center;
+    }
+
+    .about-content {
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .about h2 {
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      line-height: 1.8;
+      color: #625b56;
+    }
+
+    footer {
+      background: #24211f;
+      color: white;
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    footer .logo {
+      margin-bottom: 15px;
+    }
+
+    footer p {
+      color: #c9c2bd;
+      font-size: 13px;
+    }
+
+    /* PANIER */
+
+    .cart-panel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: min(380px, 90%);
+      height: 100vh;
+      background: white;
+      z-index: 100;
+      padding: 30px;
+      box-shadow: -5px 0 20px rgba(0,0,0,0.15);
+      transition: 0.3s;
+    }
+
+    .cart-panel.open {
+      right: 0;
+    }
+
+    .cart-panel h2 {
+      margin-bottom: 30px;
+    }
+
+    .close {
+      float: right;
+      border: none;
+      background: none;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      margin-bottom: 30px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .checkout {
+      width: 100%;
+      border: none;
+      padding: 15px;
+      border-radius: 25px;
+      background: #24211f;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 650px) {
+
+      header {
+        padding: 16px 20px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: 70vh;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        height: 330px;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">VYRA</div>
+
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="cart" onclick="openCart()">
+      🛍️ Bag (<span id="cart-count">0</span>)
+    </div>
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="small-title">VYRA COLLECTION</div>
+
+        <h1>VYRA</h1>
+
+        <p>made for your everyday mood.</p>
+
+        <a href="#shop" class="button">SHOP NOW</a>
+      </div>
+    </section>
+
+
+    <section id="shop">
+
+      <div class="section-title">
+        <h2>New arrivals</h2>
+        <p>Pieces made for your everyday.</p>
+      </div>
+
+      <div class="products">
+
+        <div class="product">
+          <div class="product-image">
+            HOODIE IMAGE
+          </div>
+
+          <div class="product-info">
+            <h3>VYRA Essential Hoodie</h3>
+            <p>Cozy oversized hoodie</p>
+            <div class="price">$59.99 CAD</div>
+
+            <button class="add" onclick="addToCart('VYRA Essential Hoodie', 59.99)">
+              Add to bag
+            </button>
+          </div>
+        </div>
+
+
+        <div class="product">
+          <div class="product-image">
+            PANTS IMAGE
+          </div>
+
+          <div class="product-info">
+            <h3>VYRA Everyday Pants</h3>
+            <p>Relaxed everyday pants</p>
+            <div class="price">$49.99 CAD</div>
+
+            <button class="add" onclick="addToCart('VYRA Everyday Pants', 49.99)">
+              Add to bag
+            </button>
+          </div>
+        </div>
+
+
+        <div class="product">
+          <div class="product-image">
+            T-SHIRT IMAGE
+          </div>
+
+          <div class="product-info">
+            <h3>VYRA Essential Tee</h3>
+            <p>Minimal everyday t-shirt</p>
+            <div class="price">$29.99 CAD</div>
+
+            <button class="add" onclick="addToCart('VYRA Essential Tee', 29.99)">
+              Add to bag
+            </button>
+          </div>
+        </div>
+
+
+        <div class="product">
+          <div class="product-image">
+            ZIP-UP IMAGE
+          </div>
+
+          <div class="product-info">
+            <h3>VYRA Cozy Zip-Up</h3>
+            <p>Soft everyday layer</p>
+            <div class="price">$54.99 CAD</div>
+
+            <button class="add" onclick="addToCart('VYRA Cozy Zip-Up', 54.99)">
+              Add to bag
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="about" id="about">
+
+      <div class="about-content">
+
+        <h2>Made for your mood.</h2>
+
+        <p>
+          VYRA is an everyday clothing brand made for the little moments,
+          the cozy days, the busy days and everything in between.
+          Simple pieces. Easy outfits. Your mood, your way.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div class="logo">VYRA</div>
+
+    <p>made for your everyday mood.</p>
+
+    <br>
+
+    <p>© 2026 VYRA. All rights reserved.</p>
+
+  </footer>
+
+
+  <!-- PANIER -->
+
+  <div class="cart-panel" id="cart-panel">
+
+    <button class="close" onclick="closeCart()">×</button>
+
+    <h2>Your bag</h2>
+
+    <div class="cart-items" id="cart-items">
+      <p>Your bag is empty.</p>
+    </div>
+
+    <h3 id="cart-total">$0.00 CAD</h3>
+
+    <br>
+
+    <button class="checkout">
+      Checkout
+    </button>
+
+  </div>
+
+
+  <script>
+
+    let cart = [];
+
+    function addToCart(name, price) {
+
+      cart.push({
+        name: name,
+        price: price
+      });
+
+      updateCart();
+
+      openCart();
+    }
+
+
+    function updateCart() {
+
+      document.getElementById("cart-count").textContent = cart.length;
+
+      const container = document.getElementById("cart-items");
+
+      if (cart.length === 0) {
+        container.innerHTML = "<p>Your bag is empty.</p>";
+      } else {
+
+        container.innerHTML = "";
+
+        cart.forEach((item, index) => {
+
+          const div = document.createElement("div");
+
+          div.className = "cart-item";
+
+          div.innerHTML = `
+            <span>${item.name}</span>
+            <strong>$${item.price.toFixed(2)}</strong>
+          `;
+
+          container.appendChild(div);
+
+        });
+      }
+
+
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+      document.getElementById("cart-total").textContent =
+        "$" + total.toFixed(2) + " CAD";
+    }
+
+
+    function openCart() {
+
+      document.getElementById("cart-panel")
+        .classList.add("open");
+
+    }
+
+
+    function closeCart() {
+
+      document.getElementById("cart-panel")
+        .classList.remove("open");
+
+    }
+
+  </script>
+
+</body>
+</html>
