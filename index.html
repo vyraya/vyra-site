@@ -1,658 +1,1645 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VYRA — made for your everyday mood.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-   .hoodie-slider {
-  position: relative;
-  overflow: hidden;
-  padding: 20px;
+<title>VYRA — made for your everyday mood.</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --cream: #f7f4ef;
+  --white: #ffffff;
+  --black: #161616;
+  --red: #e53935;
+  --soft-red: #fff0ef;
+  --grey: #77736f;
+  --line: #e7e2dc;
 }
-.hoodie-slider #hoodiePhoto {
 
-  width: 100%;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  height: 100%;
+html {
+  scroll-behavior: smooth;
+}
 
-  object-fit: contain;
-.slides {
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--cream);
+  color: var(--black);
+}
+
+/* ================= PROMO ================= */
+
+.promo-bar {
+  background: var(--black);
+  color: white;
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 12px;
+  letter-spacing: .4px;
+}
+
+.promo-bar span {
+  margin: 0 12px;
+  opacity: .45;
+}
+
+/* ================= HEADER ================= */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 72px;
+  background: rgba(247,244,239,.94);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--line);
   display: flex;
-  width: 200%;
-  height: 100%;
-  transition: transform 0.4s ease;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
 }
 
-.slides img {
-  width: 50%;
+.logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.cart-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(229,57,53,.09), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(0,0,0,.06), transparent 35%),
+    var(--cream);
+}
+
+.hero-content {
+  max-width: 850px;
+}
+
+.hero-small {
+  font-size: 11px;
+  letter-spacing: 5px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(65px, 15vw, 150px);
+  letter-spacing: 10px;
+  line-height: .9;
+}
+
+.hero h1 span {
+  color: var(--red);
+}
+
+.hero p {
+  margin: 28px 0;
+  color: var(--grey);
+  font-size: 16px;
+}
+
+.shop-button {
+  display: inline-block;
+  text-decoration: none;
+  background: var(--black);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: .2s;
+}
+
+.shop-button:hover {
+  transform: translateY(-3px);
+}
+
+/* ================= SHOP ================= */
+
+section {
+  padding: 85px 6%;
+}
+
+.section-heading {
+  max-width: 1100px;
+  margin: auto auto 45px;
+}
+
+.section-heading small {
+  color: var(--red);
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.section-heading h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 40px;
+  margin-top: 8px;
+}
+
+.section-heading p {
+  color: var(--grey);
+  margin-top: 8px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.product-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .25s;
+  border: 1px solid transparent;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--line);
+}
+
+.product-image {
+  height: 430px;
+  background: #eeeae5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
   height: 100%;
   object-fit: contain;
   padding: 15px;
+  transition: .3s;
 }
 
-.prev,
-.next {
+.product-card:hover .product-image img {
+  transform: scale(1.025);
+}
+
+.new-label {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background: rgba(255,255,255,0.8);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  font-size: 25px;
-  cursor: pointer;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: var(--black);
+  color: white;
+  padding: 7px 11px;
+  border-radius: 100px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.prev {
-  left: 12px;
+.product-info {
+  padding: 18px;
 }
 
-.next {
-  right: 12px;
+.product-info h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
-.dots {
-  position: absolute;
-  bottom: 12px;
-  left: 0;
-  right: 0;
+.product-info p {
+  color: var(--grey);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.view-product {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+}
+
+/* ================= ABOUT ================= */
+
+.about {
+  background: #ece8e2;
   text-align: center;
 }
 
-.dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  background: #aaa;
-  border-radius: 50%;
-  margin: 4px;
+.about-content {
+  max-width: 650px;
+  margin: auto;
 }
 
-.dot.active {
-  background: #24211f;
-} * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+.about h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 40px;
+  margin-bottom: 18px;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f8f5f2;
-      color: #24211f;
-    }
+.about p {
+  color: var(--grey);
+  line-height: 1.8;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(248,245,242,0.95);
-      border-bottom: 1px solid #e5dfda;
-      padding: 18px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* ================= PRODUCT MODAL ================= */
 
-    .logo {
-      font-size: 27px;
-      font-weight: 800;
-      letter-spacing: 4px;
-    }
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
-    nav {
-      display: flex;
-      gap: 25px;
-    }
+.overlay.active {
+  display: flex;
+}
 
-    nav a {
-      text-decoration: none;
-      color: #24211f;
-      font-size: 14px;
-    }
+.product-modal {
+  width: min(1000px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 24px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+}
 
-    .cart {
-      cursor: pointer;
-      font-size: 14px;
-    }
+.close-modal {
+  position: absolute;
+  right: 18px;
+  top: 15px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 3px 15px rgba(0,0,0,.1);
+}
 
-    .hero {
-      min-height: 78vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 70px 20px;
-      background: #e9e0da;
-    }
+.gallery {
+  background: #eeeae5;
+  min-height: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .hero-content {
-      max-width: 700px;
-    }
+.gallery img {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  padding: 35px;
+}
 
-    .small-title {
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      font-size: 12px;
-      margin-bottom: 18px;
-    }
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.92);
+  font-size: 25px;
+  cursor: pointer;
+  z-index: 2;
+}
 
-    .hero h1 {
-      font-size: clamp(55px, 12vw, 120px);
-      letter-spacing: 8px;
-      margin-bottom: 15px;
-    }
+.gallery-arrow.left {
+  left: 15px;
+}
 
-    .hero p {
-      font-size: 17px;
-      margin-bottom: 30px;
-      color: #625b56;
-    }
+.gallery-arrow.right {
+  right: 15px;
+}
 
-    .button {
-      display: inline-block;
-      background: #24211f;
-      color: white;
-      text-decoration: none;
-      padding: 15px 30px;
-      border-radius: 30px;
-      font-size: 13px;
-      transition: 0.2s;
-    }
+.gallery-counter {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,.9);
+  padding: 7px 12px;
+  border-radius: 100px;
+  font-size: 10px;
+}
 
-    .button:hover {
-      transform: translateY(-2px);
-      opacity: 0.85;
-    }
+.product-details {
+  padding: 55px 40px 40px;
+}
 
-    section {
-      padding: 80px 6%;
-    }
+.product-details small {
+  color: var(--red);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 45px;
-    }
+.product-details h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 32px;
+  margin: 10px 0;
+}
 
-    .section-title h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
+.modal-price {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
 
-    .section-title p {
-      color: #756d68;
-      font-size: 14px;
-    }
+.description {
+  color: var(--grey);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
-      max-width: 1100px;
-      margin: auto;
-    }
+.option-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 20px 0 10px;
+}
 
-    .product {
-      background: white;
-      border-radius: 18px;
-      overflow: hidden;
-      transition: 0.25s;
-    }
+.option-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 
-    .product:hover {
-      transform: translateY(-5px);
-    }
+.option-button {
+  background: white;
+  border: 1px solid #d9d4ce;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
 
-    .product-image {
-      height: 380px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ddd3cc;
-      font-size: 13px;
-      color: #746b65;
-      text-align: center;
-      padding: 20px;
-    }
+.option-button.selected {
+  background: var(--black);
+  color: white;
+  border-color: var(--black);
+}
 
-    .product-info {
-      padding: 20px;
-    }
+.modal-add {
+  width: 100%;
+  border: none;
+  background: var(--red);
+  color: white;
+  padding: 16px;
+  border-radius: 100px;
+  margin-top: 28px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
 
-    .product-info h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
+.modal-add:hover {
+  transform: translateY(-2px);
+}
 
-    .product-info p {
-      color: #6d6560;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
+/* ================= CART ================= */
 
-    .price {
-      font-weight: bold;
-      font-size: 15px;
-    }
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 80;
+  display: none;
+}
 
-    .add {
-      margin-top: 15px;
-      width: 100%;
-      border: none;
-      background: #24211f;
-      color: white;
-      padding: 12px;
-      border-radius: 25px;
-      cursor: pointer;
-    }
+.cart-overlay.active {
+  display: block;
+}
 
-    .about {
-      background: #eee8e3;
-      text-align: center;
-    }
+.cart-panel {
+  position: fixed;
+  z-index: 90;
+  right: -450px;
+  top: 0;
+  width: min(420px, 92%);
+  height: 100vh;
+  background: white;
+  transition: .3s;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
 
-    .about-content {
-      max-width: 650px;
-      margin: auto;
-    }
+.cart-panel.open {
+  right: 0;
+}
 
-    .about h2 {
-      font-size: 35px;
-      margin-bottom: 20px;
-    }
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
 
-    .about p {
-      line-height: 1.8;
-      color: #625b56;
-    }
+.cart-header h2 {
+  font-family: "Space Grotesk", sans-serif;
+}
 
-    footer {
-      background: #24211f;
-      color: white;
-      text-align: center;
-      padding: 45px 20px;
-    }
+.cart-close {
+  border: none;
+  background: none;
+  font-size: 26px;
+  cursor: pointer;
+}
 
-    footer .logo {
-      margin-bottom: 15px;
-    }
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+}
 
-    footer p {
-      color: #c9c2bd;
-      font-size: 13px;
-    }
+.cart-item {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 12px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+}
 
-    /* PANIER */
+.cart-item-image {
+  width: 70px;
+  height: 75px;
+  background: #eeeae5;
+  border-radius: 8px;
+  object-fit: contain;
+}
 
-    .cart-panel {
-      position: fixed;
-      right: -400px;
-      top: 0;
-      width: min(380px, 90%);
-      height: 100vh;
-      background: white;
-      z-index: 100;
-      padding: 30px;
-      box-shadow: -5px 0 20px rgba(0,0,0,0.15);
-      transition: 0.3s;
-    }
+.cart-item h4 {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
 
-    .cart-panel.open {
-      right: 0;
-    }
+.cart-item p {
+  font-size: 11px;
+  color: var(--grey);
+  line-height: 1.6;
+}
 
-    .cart-panel h2 {
-      margin-bottom: 30px;
-    }
+.remove-item {
+  border: none;
+  background: none;
+  color: var(--red);
+  font-size: 10px;
+  cursor: pointer;
+}
 
-    .close {
-      float: right;
-      border: none;
-      background: none;
-      font-size: 25px;
-      cursor: pointer;
-    }
+.cart-summary {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
 
-    .cart-items {
-      margin-bottom: 30px;
-    }
+.free-shipping {
+  background: var(--soft-red);
+  padding: 11px;
+  border-radius: 10px;
+  font-size: 11px;
+  margin-bottom: 15px;
+  text-align: center;
+}
 
-    .cart-item {
-      border-bottom: 1px solid #ddd;
-      padding: 15px 0;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
 
-    .checkout {
-      width: 100%;
-      border: none;
-      padding: 15px;
-      border-radius: 25px;
-      background: #24211f;
-      color: white;
-      cursor: pointer;
-    }
+.coupon {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
 
-    @media (max-width: 650px) {
+.coupon input {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px;
+  font: inherit;
+  font-size: 11px;
+}
 
-      header {
-        padding: 16px 20px;
-      }
+.coupon button {
+  border: none;
+  background: var(--black);
+  color: white;
+  border-radius: 8px;
+  padding: 0 15px;
+  cursor: pointer;
+  font-size: 11px;
+}
 
-      nav {
-        display: none;
-      }
+.coupon-message {
+  font-size: 11px;
+  margin-bottom: 10px;
+  min-height: 15px;
+}
 
-      .hero {
-        min-height: 70vh;
-      }
+.checkout {
+  width: 100%;
+  border: none;
+  background: var(--black);
+  color: white;
+  padding: 16px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-weight: 700;
+}
 
-      .products {
-        grid-template-columns: 1fr;
-      }
+/* ================= FOOTER ================= */
 
-      .product-image {
-        height: 330px;
-      }
+footer {
+  background: var(--black);
+  color: white;
+  text-align: center;
+  padding: 55px 20px;
+}
 
-      section {
-        padding: 60px 20px;
-      }
-    }
-  </style>
+footer .logo {
+  margin-bottom: 12px;
+}
+
+footer p {
+  color: #aaa;
+  font-size: 12px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 800px) {
+
+  nav {
+    display: none;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-image {
+    height: 350px;
+  }
+
+  .product-modal {
+    grid-template-columns: 1fr;
+    max-height: 94vh;
+  }
+
+  .gallery {
+    min-height: 380px;
+  }
+
+  .gallery img {
+    max-height: 380px;
+  }
+
+  .product-details {
+    padding: 30px 25px;
+  }
+}
+
+@media(max-width: 520px) {
+
+  header {
+    padding: 0 20px;
+  }
+
+  .promo-bar {
+    font-size: 10px;
+  }
+
+  .promo-bar span {
+    margin: 0 5px;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .product-image {
+    height: 420px;
+  }
+
+  section {
+    padding: 65px 20px;
+  }
+
+  .hero h1 {
+    font-size: 75px;
+  }
+
+  .section-heading h2 {
+    font-size: 32px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">VYRA</div>
+<!-- PROMO -->
+<div class="promo-bar">
+  Livraison gratuite dès 80$
+  <span>•</span>
+  10% de rabais sur ta première commande avec <strong>VYRA10</strong>
+</div>
 
-    <nav>
-      <a href="#shop">Shop</a>
-      <a href="#about">About</a>
-    </nav>
+<!-- HEADER -->
+<header>
 
-    <div class="cart" onclick="openCart()">
-      🛍️ Bag (<span id="cart-count">0</span>)
+  <div class="logo">VYRA</div>
+
+  <nav>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <button class="cart-button" onclick="openCart()">
+    BAG (<span id="cart-count">0</span>)
+  </button>
+
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="hero-small">
+      VYRA COLLECTION
     </div>
-  </header>
 
+    <h1>VYR<span>A</span></h1>
 
-  <main>
+    <p>
+      made for your everyday mood.
+    </p>
 
-    <section class="hero">
-      <div class="hero-content">
-        <div class="small-title">VYRA COLLECTION</div>
-
-        <h1>VYRA</h1>
-
-        <p>made for your everyday mood.</p>
-
-        <a href="#shop" class="button">SHOP NOW</a>
-      </div>
-    </section>
-
-
-    <section id="shop">
-
-      <div class="section-title">
-        <h2>New arrivals</h2>
-        <p>Pieces made for your everyday.</p>
-      </div>
-
-      <div class="products">
-
-      <div class="product">
-  <div class="product-image hoodie-slider">
-
-    <img id="hoodiePhoto" src="IMG_4085.png" alt="VYRA Essential Hoodie">
-
-    <button class="prev" onclick="moveSlide(-1)">‹</button>
-    <button class="next" onclick="moveSlide(1)">›</button>
-
-    <div class="dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-    </div>
+    <a href="#shop" class="shop-button">
+      SHOP THE COLLECTION
+    </a>
 
   </div>
 
-  <div class="product-info">
-    <h3>VYRA Essential Hoodie</h3>
-    <p>Soft everyday hoodie</p>
-    <div class="price">$59.99 CAD</div>
+</section>
 
-    <button class="add" onclick="addToCart('VYRA Essential Hoodie', 59.99)">
-      Add to bag
+
+<!-- SHOP -->
+<section id="shop">
+
+  <div class="section-heading">
+
+    <small>NEW DROP</small>
+
+    <h2>Everyday pieces.</h2>
+
+    <p>
+      Simple silhouettes. Your mood. Your way.
+    </p>
+
+  </div>
+
+  <div class="products" id="products"></div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section class="about" id="about">
+
+  <div class="about-content">
+
+    <h2>Made for your mood.</h2>
+
+    <p>
+      VYRA is an everyday clothing brand made for the little moments,
+      the cozy days, the busy days and everything in between.
+      Simple pieces. Easy outfits. Your mood, your way.
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="logo">VYRA</div>
+
+  <p>made for your everyday mood.</p>
+
+  <br>
+
+  <p>© 2026 VYRA. All rights reserved.</p>
+
+</footer>
+
+
+<!-- PRODUCT MODAL -->
+
+<div class="overlay" id="product-overlay" onclick="closeProductOutside(event)">
+
+  <div class="product-modal">
+
+    <button class="close-modal" onclick="closeProduct()">
+      ×
     </button>
-  </div>
-</div>
 
-  <button class="prev" onclick="moveSlide(-1)">‹</button>
-  <button class="next" onclick="moveSlide(1)">›</button>
+    <div class="gallery">
 
-  <div class="dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-  </div>
-</div>
+      <button
+        class="gallery-arrow left"
+        onclick="changeProductImage(-1)"
+      >
+        ‹
+      </button>
 
+      <img id="modal-image" src="" alt="Produit VYRA">
 
-        <div class="product">
-          <div class="product-image">
-            PANTS IMAGE
-          </div>
+      <button
+        class="gallery-arrow right"
+        onclick="changeProductImage(1)"
+      >
+        ›
+      </button>
 
-          <div class="product-info">
-            <h3>VYRA Everyday Pants</h3>
-            <p>Relaxed everyday pants</p>
-            <div class="price">$49.99 CAD</div>
-
-            <button class="add" onclick="addToCart('VYRA Everyday Pants', 49.99)">
-              Add to bag
-            </button>
-          </div>
-        </div>
-
-
-        <div class="product">
-          <div class="product-image">
-            T-SHIRT IMAGE
-          </div>
-
-          <div class="product-info">
-            <h3>VYRA Essential Tee</h3>
-            <p>Minimal everyday t-shirt</p>
-            <div class="price">$29.99 CAD</div>
-
-            <button class="add" onclick="addToCart('VYRA Essential Tee', 29.99)">
-              Add to bag
-            </button>
-          </div>
-        </div>
-
-
-        <div class="product">
-          <div class="product-image">
-            ZIP-UP IMAGE
-          </div>
-
-          <div class="product-info">
-            <h3>VYRA Cozy Zip-Up</h3>
-            <p>Soft everyday layer</p>
-            <div class="price">$54.99 CAD</div>
-
-            <button class="add" onclick="addToCart('VYRA Cozy Zip-Up', 54.99)">
-              Add to bag
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <section class="about" id="about">
-
-      <div class="about-content">
-
-        <h2>Made for your mood.</h2>
-
-        <p>
-          VYRA is an everyday clothing brand made for the little moments,
-          the cozy days, the busy days and everything in between.
-          Simple pieces. Easy outfits. Your mood, your way.
-        </p>
-
+      <div class="gallery-counter" id="gallery-counter">
+        1 / 2
       </div>
 
-    </section>
-
-  </main>
+    </div>
 
 
-  <footer>
+    <div class="product-details">
 
-    <div class="logo">VYRA</div>
+      <small id="modal-code">
+        VYRA
+      </small>
 
-    <p>made for your everyday mood.</p>
+      <h2 id="modal-name">
+        Product
+      </h2>
 
-    <br>
+      <div class="modal-price" id="modal-price">
+        $0.00 CAD
+      </div>
 
-    <p>© 2026 VYRA. All rights reserved.</p>
-
-  </footer>
+      <p class="description" id="modal-description"></p>
 
 
-  <!-- PANIER -->
+      <div class="option-title">
+        SIZE
+      </div>
 
-  <div class="cart-panel" id="cart-panel">
+      <div
+        class="option-buttons"
+        id="size-options"
+      ></div>
 
-    <button class="close" onclick="closeCart()">×</button>
+
+      <div class="option-title">
+        COLOR
+      </div>
+
+      <div
+        class="option-buttons"
+        id="color-options"
+      ></div>
+
+
+      <button
+        class="modal-add"
+        onclick="addSelectedProduct()"
+      >
+        ADD TO BAG
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- CART BACKDROP -->
+
+<div
+  class="cart-overlay"
+  id="cart-overlay"
+  onclick="closeCart()"
+></div>
+
+
+<!-- CART -->
+
+<div
+  class="cart-panel"
+  id="cart-panel"
+>
+
+  <div class="cart-header">
 
     <h2>Your bag</h2>
 
-    <div class="cart-items" id="cart-items">
-      <p>Your bag is empty.</p>
-    </div>
-
-    <h3 id="cart-total">$0.00 CAD</h3>
-
-    <br>
-
-    <button class="checkout">
-      Checkout
+    <button
+      class="cart-close"
+      onclick="closeCart()"
+    >
+      ×
     </button>
 
   </div>
 
 
-  <script>
-
-    let cart = [];
-
-    function addToCart(name, price) {
-
-      cart.push({
-        name: name,
-        price: price
-      });
-
-      updateCart();
-
-      openCart();
-    }
+  <div
+    class="cart-items"
+    id="cart-items"
+  ></div>
 
 
-    function updateCart() {
+  <div class="cart-summary">
 
-      document.getElementById("cart-count").textContent = cart.length;
-
-      const container = document.getElementById("cart-items");
-
-      if (cart.length === 0) {
-        container.innerHTML = "<p>Your bag is empty.</p>";
-      } else {
-
-        container.innerHTML = "";
-
-        cart.forEach((item, index) => {
-
-          const div = document.createElement("div");
-
-          div.className = "cart-item";
-
-          div.innerHTML = `
-            <span>${item.name}</span>
-            <strong>$${item.price.toFixed(2)}</strong>
-          `;
-
-          container.appendChild(div);
-
-        });
-      }
+    <div
+      class="free-shipping"
+      id="shipping-message"
+    >
+      Livraison gratuite dès 80$
+    </div>
 
 
-      let total = cart.reduce((sum, item) => sum + item.price, 0);
+    <div class="coupon">
 
-      document.getElementById("cart-total").textContent =
-        "$" + total.toFixed(2) + " CAD";
-    }
+      <input
+        id="coupon-input"
+        type="text"
+        placeholder="Code promo"
+      >
+
+      <button onclick="applyCoupon()">
+        APPLY
+      </button>
+
+    </div>
+
+    <div
+      class="coupon-message"
+      id="coupon-message"
+    ></div>
 
 
-    function openCart() {
+    <div class="cart-total-row">
 
-      document.getElementById("cart-panel")
-        .classList.add("open");
+      <span>Total</span>
 
-    }
+      <span id="cart-total">
+        $0.00 CAD
+      </span>
+
+    </div>
 
 
-    function closeCart() {
+    <button
+      class="checkout"
+      onclick="checkout()"
+    >
+      CHECKOUT
+    </button>
 
-      document.getElementById("cart-panel")
-        .classList.remove("open");
+  </div>
 
-    }
+</div>
 
- let currentSlide = 0;
 
-const hoodiePhotos = [
+<script>
 
-  "IMG_4085.png",
+/* =========================================
+   PRODUCTS
+========================================= */
 
-  "IMG_4086.png"
+const products = [
+
+  {
+    id: "hoodie-001",
+
+    code: "HOODIE 001",
+
+    name: "VYRA Essential Hoodie",
+
+    price: 59.99,
+
+    images: [
+      "IMG_4085.png",
+      "IMG_4086.png"
+    ],
+
+    sizes: ["XS", "S", "M", "L", "XL"],
+
+    colors: ["Black"],
+
+    description:
+      "Le hoodie essentiel VYRA. Une pièce simple et confortable pensée pour être portée tous les jours."
+  },
+
+
+  {
+    id: "hoodie-002",
+
+    code: "HOODIE 002",
+
+    name: "VYRA Hoodie 002",
+
+    price: 59.99,
+
+    images: [
+      "IMG_4129.jpeg",
+      "IMG_4130.jpeg"
+    ],
+
+    sizes: ["XS", "S", "M", "L", "XL"],
+
+    colors: ["Red"],
+
+    description:
+      "Le Hoodie 002 de VYRA. Une silhouette streetwear moderne avec un design pensé pour accompagner ton everyday mood."
+  },
+
+
+  {
+    id: "tee-001",
+
+    code: "TEE 001",
+
+    name: "VYRA Essential Tee",
+
+    price: 29.99,
+
+    images: [
+      "IMG_4131.jpeg",
+      "IMG_4132.jpeg"
+    ],
+
+    sizes: ["XS", "S", "M", "L", "XL"],
+
+    colors: ["White"],
+
+    description:
+      "Un t-shirt essentiel VYRA avec une coupe simple et facile à porter au quotidien."
+  }
 
 ];
 
-function moveSlide(direction) {
 
-  currentSlide += direction;
+/* =========================================
+   STATE
+========================================= */
 
-  if (currentSlide < 0) {
+let cart =
+  JSON.parse(localStorage.getItem("vyraCart")) || [];
 
-    currentSlide = hoodiePhotos.length - 1;
+let currentProduct = null;
 
-  }
+let currentImage = 0;
 
-  if (currentSlide >= hoodiePhotos.length) {
+let selectedSize = null;
 
-    currentSlide = 0;
+let selectedColor = null;
 
-  }
+let couponApplied =
+  localStorage.getItem("vyraCouponUsed") === "true";
 
-  document.getElementById("hoodiePhoto").src = hoodiePhotos[currentSlide];
 
-  document.querySelectorAll(".dot").forEach((dot, index) => {
+/* =========================================
+   DISPLAY PRODUCTS
+========================================= */
 
-    dot.classList.toggle("active", index === currentSlide);
+function displayProducts() {
+
+  const container =
+    document.getElementById("products");
+
+  container.innerHTML = "";
+
+  products.forEach(product => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "product-card";
+
+    card.onclick = () =>
+      openProduct(product.id);
+
+    card.innerHTML = `
+
+      <div class="product-image">
+
+        ${
+          product.id !== "hoodie-001"
+          ? `<div class="new-label">NEW</div>`
+          : ""
+        }
+
+        <img
+          src="${product.images[0]}"
+          alt="${product.name}"
+        >
+
+      </div>
+
+      <div class="product-info">
+
+        <h3>${product.name}</h3>
+
+        <p>${product.code}</p>
+
+        <div class="product-bottom">
+
+          <span class="price">
+            $${product.price.toFixed(2)} CAD
+          </span>
+
+          <span class="view-product">
+            VIEW →
+          </span>
+
+        </div>
+
+      </div>
+
+    `;
+
+    container.appendChild(card);
+
   });
-} </script>
+
+}
+
+
+/* =========================================
+   PRODUCT MODAL
+========================================= */
+
+function openProduct(id) {
+
+  currentProduct =
+    products.find(p => p.id === id);
+
+  currentImage = 0;
+
+  selectedSize = null;
+
+  selectedColor = null;
+
+  document.getElementById("modal-code")
+    .textContent =
+    currentProduct.code;
+
+  document.getElementById("modal-name")
+    .textContent =
+    currentProduct.name;
+
+  document.getElementById("modal-price")
+    .textContent =
+    "$" +
+    currentProduct.price.toFixed(2) +
+    " CAD";
+
+  document.getElementById("modal-description")
+    .textContent =
+    currentProduct.description;
+
+  renderOptions();
+
+  updateGallery();
+
+  document
+    .getElementById("product-overlay")
+    .classList.add("active");
+
+  document.body.style.overflow = "hidden";
+}
+
+
+function closeProduct() {
+
+  document
+    .getElementById("product-overlay")
+    .classList.remove("active");
+
+  document.body.style.overflow = "";
+
+}
+
+
+function closeProductOutside(event) {
+
+  if (event.target.id === "product-overlay") {
+    closeProduct();
+  }
+
+}
+
+
+/* =========================================
+   GALLERY
+========================================= */
+
+function updateGallery() {
+
+  document.getElementById("modal-image")
+    .src =
+    currentProduct.images[currentImage];
+
+  document.getElementById("gallery-counter")
+    .textContent =
+    `${currentImage + 1} / ${currentProduct.images.length}`;
+
+}
+
+
+function changeProductImage(direction) {
+
+  currentImage += direction;
+
+  if (
+    currentImage < 0
+  ) {
+    currentImage =
+      currentProduct.images.length - 1;
+  }
+
+  if (
+    currentImage >= currentProduct.images.length
+  ) {
+    currentImage = 0;
+  }
+
+  updateGallery();
+
+}
+
+
+/* =========================================
+   SIZE + COLOR
+========================================= */
+
+function renderOptions() {
+
+  const sizeContainer =
+    document.getElementById("size-options");
+
+  const colorContainer =
+    document.getElementById("color-options");
+
+  sizeContainer.innerHTML = "";
+
+  colorContainer.innerHTML = "";
+
+
+  currentProduct.sizes.forEach(size => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "option-button";
+
+    button.textContent = size;
+
+    button.onclick = () => {
+
+      selectedSize = size;
+
+      document
+        .querySelectorAll("#size-options .option-button")
+        .forEach(btn =>
+          btn.classList.remove("selected")
+        );
+
+      button.classList.add("selected");
+
+    };
+
+    sizeContainer.appendChild(button);
+
+  });
+
+
+  currentProduct.colors.forEach(color => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "option-button";
+
+    button.textContent = color;
+
+    button.onclick = () => {
+
+      selectedColor = color;
+
+      document
+        .querySelectorAll("#color-options .option-button")
+        .forEach(btn =>
+          btn.classList.remove("selected")
+        );
+
+      button.classList.add("selected");
+
+    };
+
+    colorContainer.appendChild(button);
+
+  });
+
+}
+
+
+/* =========================================
+   ADD TO CART
+========================================= */
+
+function addSelectedProduct() {
+
+  if (!selectedSize) {
+
+    alert("Choisis une taille.");
+
+    return;
+
+  }
+
+  if (!selectedColor) {
+
+    alert("Choisis une couleur.");
+
+    return;
+
+  }
+
+
+  cart.push({
+
+    id: currentProduct.id,
+
+    name: currentProduct.name,
+
+    code: currentProduct.code,
+
+    price: currentProduct.price,
+
+    image: currentProduct.images[0],
+
+    size: selectedSize,
+
+    color: selectedColor
+
+  });
+
+
+  saveCart();
+
+  closeProduct();
+
+  openCart();
+
+}
+
+
+/* =========================================
+   CART
+========================================= */
+
+function saveCart() {
+
+  localStorage.setItem(
+    "vyraCart",
+    JSON.stringify(cart)
+  );
+
+  updateCart();
+
+}
+
+
+function updateCart() {
+
+  document.getElementById("cart-count")
+    .textContent =
+    cart.length;
+
+  const container =
+    document.getElementById("cart-items");
+
+  container.innerHTML = "";
+
+
+  if (cart.length === 0) {
+
+    container.innerHTML = `
+      <div style="padding:35px 0;color:#777;font-size:13px;">
+        Your bag is empty.
+      </div>
+    `;
+
+  }
+
+
+  cart.forEach((item, index) => {
+
+    const div =
+      document.createElement("div");
+
+    div.className = "cart-item";
+
+    div.innerHTML = `
+
+      <img
+        class="cart-item-image"
+        src="${item.image}"
+      >
+
+      <div>
+
+        <h4>
+          ${item.name}
+        </h4>
+
+        <p>
+          ${item.size} · ${item.color}<br>
+          $${item.price.toFixed(2)} CAD
+        </p>
+
+        <button
+          class="remove-item"
+          onclick="removeItem(${index})"
+        >
+          REMOVE
+        </button>
+
+      </div>
+
+    `;
+
+    container.appendChild(div);
+
+  });
+
+
+  const subtotal =
+    cart.reduce(
+      (total, item) =>
+        total + item.price,
+      0
+    );
+
+
+  let total = subtotal;
+
+  if (couponApplied) {
+    total = subtotal * 0.90;
+  }
+
+
+  document.getElementById("cart-total")
+    .textContent =
+    "$" + total.toFixed(2) + " CAD";
+
+
+  const shippingMessage =
+    document.getElementById("shipping-message");
+
+
+  if (subtotal >= 80) {
+
+    shippingMessage.textContent =
+      "🎉 Livraison gratuite activée !";
+
+  } else {
+
+    const remaining =
+      80 - subtotal;
+
+    shippingMessage.textContent =
+      `Ajoute $${remaining.toFixed(2)} pour la livraison gratuite.`;
+
+  }
+
+}
+
+
+function removeItem(index) {
+
+  cart.splice(index, 1);
+
+  saveCart();
+
+}
+
+
+/* =========================================
+   CART OPEN/CLOSE
+========================================= */
+
+function openCart() {
+
+  document
+    .getElementById("cart-panel")
+    .classList.add("open");
+
+  document
+    .getElementById("cart-overlay")
+    .classList.add("active");
+
+}
+
+
+function closeCart() {
+
+  document
+    .getElementById("cart-panel")
+    .classList.remove("open");
+
+  document
+    .getElementById("cart-overlay")
+    .classList.remove("active");
+
+}
+
+
+/* =========================================
+   COUPON
+========================================= */
+
+function applyCoupon() {
+
+  const input =
+    document.getElementById("coupon-input");
+
+  const message =
+    document.getElementById("coupon-message");
+
+  const code =
+    input.value.trim().toUpperCase();
+
+
+  if (couponApplied) {
+
+    message.textContent =
+      "Ce code a déjà été utilisé.";
+
+    return;
+
+  }
+
+
+  if (code !== "VYRA10") {
+
+    message.textContent =
+      "Code promo invalide.";
+
+    return;
+
+  }
+
+
+  if (cart.length === 0) {
+
+    message.textContent =
+      "Ajoute un article avant d'utiliser le code.";
+
+    return;
+
+  }
+
+
+  couponApplied = true;
+
+  localStorage.setItem(
+    "vyraCouponUsed",
+    "true"
+  );
+
+
+  message.textContent =
+    "✓ 10% de rabais appliqué !";
+
+  updateCart();
+
+}
+
+
+/* =========================================
+   CHECKOUT
+========================================= */
+
+function checkout() {
+
+  if (cart.length === 0) {
+
+    alert("Ton panier est vide.");
+
+    return;
+
+  }
+
+
+  alert(
+    "Le panier est prêt ! Le paiement devra être connecté à un système de paiement avant de pouvoir recevoir de vraies commandes."
+  );
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+displayProducts();
+
+updateCart();
+
+</script>
 
 </body>
 </html>
