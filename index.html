@@ -401,11 +401,31 @@
 
       <div class="products">
 
-       <div class="product-image hoodie-slider">
-  <div class="slides">
-    <img src="IMG_4085.png" alt="VYRA Essential Hoodie - devant">
-    <img src="IMG_4086.png" alt="VYRA Essential Hoodie - derrière">
+      <div class="product">
+  <div class="product-image hoodie-slider">
+
+    <img id="hoodiePhoto" src="IMG_4085.png" alt="VYRA Essential Hoodie">
+
+    <button class="prev" onclick="moveSlide(-1)">‹</button>
+    <button class="next" onclick="moveSlide(1)">›</button>
+
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+    </div>
+
   </div>
+
+  <div class="product-info">
+    <h3>VYRA Essential Hoodie</h3>
+    <p>Soft everyday hoodie</p>
+    <div class="price">$59.99 CAD</div>
+
+    <button class="add" onclick="addToCart('VYRA Essential Hoodie', 59.99)">
+      Add to bag
+    </button>
+  </div>
+</div>
 
   <button class="prev" onclick="moveSlide(-1)">‹</button>
   <button class="next" onclick="moveSlide(1)">›</button>
